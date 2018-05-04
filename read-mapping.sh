@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# sh read-mapping.sh [read_len]
+# sh read-mapping.sh
 
 reads_out_dir="./reads/"
 reads_file_prefix="reads"
@@ -16,12 +16,12 @@ file_prefix="bowtie"
 bowtie2-build ${ref_genome} ${out_dir}genome-index
 
 # Single mapping, best-match
-bowtie2 -x ${out_dir}genome-index -U ${reads_out_dir}${reads_file_prefix}.fq -S ${out_dir}${file_prefix}-mapping-best-match.sam \
-2> ${out_dir}${file_prefix}-mapping-best-match-log.txt
+bowtie2 -x ${out_dir}genome-index -1 ${reads_out_dir}${reads_file_prefix}_1.fq -2 ${reads_out_dir}${reads_file_prefix}_2.fq \
+-S ${out_dir}${file_prefix}-mapping-best-match.sam 2> ${out_dir}${file_prefix}-mapping-best-match-log.txt
 
 # Single mapping, report-all
-bowtie2 -a -x ${out_dir}genome-index -U ${reads_out_dir}${reads_file_prefix}.fq -S ${out_dir}${file_prefix}-mapping-report-all.sam \
-2> ${out_dir}${file_prefix}-mapping-report-all-log.txt
+bowtie2 -a -x ${out_dir}genome-index -1 ${reads_out_dir}${reads_file_prefix}_1.fq -2 ${reads_out_dir}${reads_file_prefix}_2.fq \
+-S ${out_dir}${file_prefix}-mapping-report-all.sam 2> ${out_dir}${file_prefix}-mapping-report-all-log.txt
 
 echo "\n=== Bowtie2 read mapping completed! ===\n"
 
@@ -48,12 +48,12 @@ file_prefix="bwa"
 bwa index -p ${out_dir}genome-index ${ref_genome}
 
 # Single mapping, best-match
-bwa mem ${out_dir}genome-index ${reads_out_dir}${reads_file_prefix}.fq > ${out_dir}${file_prefix}-mapping-best-match.sam \
-2> ${out_dir}${file_prefix}-mapping-best-match-log.txt
+bwa mem ${out_dir}genome-index ${reads_out_dir}${reads_file_prefix}_1.fq ${reads_out_dir}${reads_file_prefix}_2.fq \
+> ${out_dir}${file_prefix}-mapping-best-match.sam 2> ${out_dir}${file_prefix}-mapping-best-match-log.txt
 
 # Single mapping, report-all
-bwa mem -a ${out_dir}genome-index ${reads_out_dir}${reads_file_prefix}.fq > ${out_dir}${file_prefix}-mapping-report-all.sam \
-2> ${out_dir}${file_prefix}-mapping-report-all-log.txt
+bwa mem -a ${out_dir}genome-index ${reads_out_dir}${reads_file_prefix}_1.fq ${reads_out_dir}${reads_file_prefix}_2.fq \
+> ${out_dir}${file_prefix}-mapping-report-all.sam 2> ${out_dir}${file_prefix}-mapping-report-all-log.txt
 
 echo "\n=== BWA read mapping completed! ===\n"
 
