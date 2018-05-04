@@ -5,7 +5,7 @@ make_exp_dir() {
 }
 
 get_reads() {
-  fastq-dump --outdir $3/reads/fastq --gzip --skip-technical --readids --read-filter pass --dumpbase --split-files --clip $1
+  fastq-dump --outdir $3/reads/fastq --gzip --skip-technical --read-filter pass --dumpbase --split-files --clip $1
   gunzip $3/reads/fastq/$1_pass_1.fastq.gz
   gunzip $3/reads/fastq/$1_pass_2.fastq.gz
   fastx_trimmer -l $2 -m $2 -Q33 -i $3/reads/fastq/$1_pass_1.fastq -o $3/reads/reads_1.fq
