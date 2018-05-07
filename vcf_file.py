@@ -20,6 +20,6 @@ def read_vcf_file(vcf_file_name, gene_loci):
                     # locus = int(row[1]) - 1956487 + 14
                     if locus[0] <= pos <= locus[1]:
                         start_dist = pos - (locus[0] - 1) + 14
-                        end_dist = (locus[1] - 1) - pos + 14
+                        end_dist = locus[1] - (pos - 1) + 14
                         variants.append((chrom, pos, ref, alt, start_dist, end_dist))
     return variants
