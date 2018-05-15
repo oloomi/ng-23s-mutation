@@ -30,3 +30,5 @@ get_reads $2 $3 .
 sh ${script_path}read-mapping.sh
 sh ${script_path}multimapping-resolution.sh $3
 sh ${script_path}variant-calling.sh
+
+python3 ${script_path}evaluation.py

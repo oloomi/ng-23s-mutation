@@ -13,6 +13,12 @@ script_path="$( cd "$(dirname "$0")" ; pwd -P )/"
 ref_genome="ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/020/105/GCA_000020105.1_ASM2010v1/GCA_000020105.1_ASM2010v1_genomic.fna.gz"
 genes="[(1263410, 1266299), (1620898, 1623787), (1724797, 1727686), (1956488, 1959377)]"
 
+# NZ2015-139 AUSMDU00006903 (all 4 mutated)
 mkdir ${dir}lee-C2611T-1
 cd ${dir}lee-C2611T-1
 sh ${script_path}pipeline.sh ${ref_genome} SRR5827361 130 ${genes}
+
+# NZ2015-168 AUSMDU00006931 (all 4 mutated)
+mkdir ${dir}lee-C2611T-2
+cd ${dir}lee-C2611T-2
+sh ${script_path}pipeline.sh ${ref_genome} SRR5827099 130 ${genes}

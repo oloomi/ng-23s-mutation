@@ -10,11 +10,11 @@ def variant_evaluation():
     vcf_files_names = [["Bowtie2 best-match", "bowtie-mapping-best-match-sorted"],
                        ["Bowtie2 report-all", "bowtie-mapping-report-all-sorted"],
                        ["Bowtie2 + MMR", "bowtie-mmr-sorted"],
-                       ["Bowtie2 + REMU", "bowtie-remu-sorted"],
-                       ["BWA best-match", "bwa-mapping-best-match-sorted"],
-                       ["BWA report-all", "bwa-mapping-report-all-sorted"],
-                       ["BWA + MMR", "bwa-mmr-sorted"],
-                       ["BWA + REMU", "bwa-remu-sorted"]]
+                       ["Bowtie2 + REMU", "bowtie-remu-sorted"]]
+                       # ["BWA best-match", "bwa-mapping-best-match-sorted"],
+                       # ["BWA report-all", "bwa-mapping-report-all-sorted"],
+                       # ["BWA + MMR", "bwa-mmr-sorted"],
+                       # ["BWA + REMU", "bwa-remu-sorted"]]
     evaluation_results = open("./results/variants-comparison-freebayes.txt", 'w')
 
     gene_loci = [(1263410, 1266299), (1620898, 1623787), (1724797, 1727686), (1956488, 1959377)]
