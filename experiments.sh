@@ -15,4 +15,4 @@ genes="[(1263410, 1266299), (1620898, 1623787), (1724797, 1727686), (1956488, 19
 
 mkdir ${dir}lee-C2611T-1
 cd ${dir}lee-C2611T-1
-sh ${script_path}experiment.sh ${ref_genome} SRR5827361 130 ${genes}
+sh ${script_path}pipeline.sh ${ref_genome} SRR5827361 130 ${genes}
