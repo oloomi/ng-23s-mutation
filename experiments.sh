@@ -22,3 +22,23 @@ sh ${script_path}pipeline.sh ${ref_genome} SRR5827361 130 ${genes}
 mkdir ${dir}lee-C2611T-2
 cd ${dir}lee-C2611T-2
 sh ${script_path}pipeline.sh ${ref_genome} SRR5827099 130 ${genes}
+
+# Netherlands-69 SAMN05901177 (1/4 mutated, < 30 days)
+mkdir ${dir}wind-C2611T-1
+cd ${dir}wind-C2611T-1
+sh ${script_path}pipeline.sh ${ref_genome} SRR4418280 200 ${genes}
+
+# Netherlands-29 SAMN05901175 (3/4 mutated, no exposure)
+mkdir ${dir}wind-C2611T-2
+cd ${dir}wind-C2611T-2
+sh ${script_path}pipeline.sh ${ref_genome} SRR4418267 200 ${genes}
+
+# Netherlands-28 SAMN05901174 (3/4 mutated, < 30 days)
+mkdir ${dir}wind-C2611T-3
+cd ${dir}wind-C2611T-3
+sh ${script_path}pipeline.sh ${ref_genome} SRR4418256 200 ${genes}
+
+# Netherlands-277 SAMN05901189 (4/4 mutated, no exposure)
+mkdir ${dir}wind-C2611T-4
+cd ${dir}wind-C2611T-4
+sh ${script_path}pipeline.sh ${ref_genome} SRR4418263 200 ${genes}
