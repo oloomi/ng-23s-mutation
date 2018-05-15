@@ -1,7 +1,15 @@
 #!/bin/bash
 
+# sh experiment.sh [ref_genome] [SRA] [read_len] [genes]
+
+script_path="$( cd "$(dirname "$0")" ; pwd -P )/"
+
 make_exp_dir() {
   mkdir -p $1/genome $1/mappings/bowtie $1/mappings/bwa $1/reads $1/results $1/variants
+}
+
+get_genome() {
+  wget -O - $1 | gunzip -c > $1/genome/reference-genome.fna
 }
 
 get_reads() {
@@ -16,13 +24,9 @@ get_reads() {
 # Experiment
 
 make_exp_dir .
+get_genome $1
+get_reads $2 $3 .
 
-# reference genome Neisseria gonorrhoeae strain NCCP11945
-# https://www.ncbi.nlm.nih.gov/nuccore/CP001050.1
-# copy to genome folder
-
-get_reads SRR5827361 130 .
-
-sh read-mapping.sh
-sh multimapping-resolution.sh 130
-sh variant-calling.sh
+sh ${script_path}read-mapping.sh
+sh ${script_path}multimapping-resolution.sh $3
+sh ${script_path}variant-calling.sh

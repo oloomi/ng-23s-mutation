@@ -41,34 +41,34 @@ echo "\n=== Bowtie 2 SAMTools completed! ===\n"
 
 # ==== BWA Read mapping ====
 
-out_dir="./mappings/bwa/"
-file_prefix="bwa"
-
-# Build index for reference genome
-bwa index -p ${out_dir}genome-index ${ref_genome}
-
-# Single mapping, best-match
-bwa mem ${out_dir}genome-index ${reads_out_dir}${reads_file_prefix}_1.fq ${reads_out_dir}${reads_file_prefix}_2.fq \
-> ${out_dir}${file_prefix}-mapping-best-match.sam 2> ${out_dir}${file_prefix}-mapping-best-match-log.txt
-
-# Single mapping, report-all
-bwa mem -a ${out_dir}genome-index ${reads_out_dir}${reads_file_prefix}_1.fq ${reads_out_dir}${reads_file_prefix}_2.fq \
-> ${out_dir}${file_prefix}-mapping-report-all.sam 2> ${out_dir}${file_prefix}-mapping-report-all-log.txt
-
-echo "\n=== BWA read mapping completed! ===\n"
-
-# ==== SAMTools on BWA ====
-
-# Creating BAM files for best-match
-samtools view -bS ${out_dir}${file_prefix}-mapping-best-match.sam -o ${out_dir}${file_prefix}-mapping-best-match.bam
-samtools sort ${out_dir}${file_prefix}-mapping-best-match.bam -o ${out_dir}${file_prefix}-mapping-best-match-sorted.bam
-samtools index ${out_dir}${file_prefix}-mapping-best-match-sorted.bam
-
-# Creating BAM files for report-all
-samtools view -bS ${out_dir}${file_prefix}-mapping-report-all.sam -o ${out_dir}${file_prefix}-mapping-report-all.bam
-samtools sort ${out_dir}${file_prefix}-mapping-report-all.bam -o ${out_dir}${file_prefix}-mapping-report-all-sorted.bam
-samtools index ${out_dir}${file_prefix}-mapping-report-all-sorted.bam
-
-echo "\n=== BWA SAMTools completed! ===\n"
+#out_dir="./mappings/bwa/"
+#file_prefix="bwa"
+#
+## Build index for reference genome
+#bwa index -p ${out_dir}genome-index ${ref_genome}
+#
+## Single mapping, best-match
+#bwa mem ${out_dir}genome-index ${reads_out_dir}${reads_file_prefix}_1.fq ${reads_out_dir}${reads_file_prefix}_2.fq \
+#> ${out_dir}${file_prefix}-mapping-best-match.sam 2> ${out_dir}${file_prefix}-mapping-best-match-log.txt
+#
+## Single mapping, report-all
+#bwa mem -a ${out_dir}genome-index ${reads_out_dir}${reads_file_prefix}_1.fq ${reads_out_dir}${reads_file_prefix}_2.fq \
+#> ${out_dir}${file_prefix}-mapping-report-all.sam 2> ${out_dir}${file_prefix}-mapping-report-all-log.txt
+#
+#echo "\n=== BWA read mapping completed! ===\n"
+#
+## ==== SAMTools on BWA ====
+#
+## Creating BAM files for best-match
+#samtools view -bS ${out_dir}${file_prefix}-mapping-best-match.sam -o ${out_dir}${file_prefix}-mapping-best-match.bam
+#samtools sort ${out_dir}${file_prefix}-mapping-best-match.bam -o ${out_dir}${file_prefix}-mapping-best-match-sorted.bam
+#samtools index ${out_dir}${file_prefix}-mapping-best-match-sorted.bam
+#
+## Creating BAM files for report-all
+#samtools view -bS ${out_dir}${file_prefix}-mapping-report-all.sam -o ${out_dir}${file_prefix}-mapping-report-all.bam
+#samtools sort ${out_dir}${file_prefix}-mapping-report-all.bam -o ${out_dir}${file_prefix}-mapping-report-all-sorted.bam
+#samtools index ${out_dir}${file_prefix}-mapping-report-all-sorted.bam
+#
+#echo "\n=== BWA SAMTools completed! ===\n"
 
 
