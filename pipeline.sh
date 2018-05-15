@@ -1,18 +1,32 @@
 #!/bin/bash
 
-dir=`pwd`/
+# sh experiment.sh [ref_genome] [SRA] [read_len] [genes]
+
 script_path="$( cd "$(dirname "$0")" ; pwd -P )/"
 
-# Running experiments
+make_exp_dir() {
+  mkdir -p $1/genome $1/mappings/bowtie $1/mappings/bwa $1/reads $1/results $1/variants
+}
 
-# Reference genome Neisseria gonorrhoeae strain NCCP11945
-# https://www.ncbi.nlm.nih.gov/nuccore/CP001050.1
-# wget ftp://ftp.ncbi.nlm.nih.gov/genomes/ASSEMBLY_REPORTS/assembly_summary_genbank.txt
-# grep -E 'NCCP11945' assembly_summary_genbank.txt | cut -f 20
+get_genome() {
+  wget -O - $1 | gunzip -c > $1/genome/reference-genome.fna
+}
 
-ref_genome="ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/020/105/GCA_000020105.1_ASM2010v1/GCA_000020105.1_ASM2010v1_genomic.fna.gz"
-genes="[(1263410, 1266299), (1620898, 1623787), (1724797, 1727686), (1956488, 1959377)]"
+get_reads() {
+  fastq-dump --outdir $3/reads/fastq --gzip --skip-technical --readids --read-filter pass --dumpbase --split-files --clip $1
+  gunzip $3/reads/fastq/$1_pass_1.fastq.gz
+  gunzip $3/reads/fastq/$1_pass_2.fastq.gz
+  fastx_trimmer -l $2 -m $2 -Q33 -i $3/reads/fastq/$1_pass_1.fastq -o $3/reads/reads_1.fq
+  fastx_trimmer -l $2 -m $2 -Q33 -i $3/reads/fastq/$1_pass_2.fastq -o $3/reads/reads_2.fq
+}
 
-mkdir ${dir}lee-C2611T-1
-cd ${dir}lee-C2611T-1
-sh ${script_path}experiment.sh ${ref_genome} SRR5827361 130 ${genes}
+
+# Experiment
+
+make_exp_dir .
+get_genome $1
+get_reads $2 $3 .
+
+sh ${script_path}read-mapping.sh
+sh ${script_path}multimapping-resolution.sh $3
+sh ${script_path}variant-calling.sh
