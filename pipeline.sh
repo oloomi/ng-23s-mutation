@@ -9,7 +9,7 @@ make_exp_dir() {
 }
 
 get_genome() {
-  wget -O - $1 | gunzip -c > $1/genome/reference-genome.fna
+  wget -O - $1 | gunzip -c > ./genome/reference-genome.fna
 }
 
 get_reads() {
