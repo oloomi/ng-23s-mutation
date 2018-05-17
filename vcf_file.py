@@ -15,11 +15,14 @@ def read_vcf_file(vcf_file_name, gene_loci):
             ref = fields[3]
             alt = fields[4]
             qual = float(fields[5])
+            # AO: Count of full observations of this alternate haplotype
+            # DP: Total read depth at the locus
+            info = dict(item.split("=") for item in fields[7].split(";"))
             if qual > 0:
                 for locus in gene_loci:
                     # locus = int(row[1]) - 1956487 + 14
                     if locus[0] <= pos <= locus[1]:
                         start_dist = pos - (locus[0] - 1) + 14
                         end_dist = locus[1] - (pos - 1) + 14
-                        variants.append((chrom, pos, ref, alt, start_dist, end_dist))
+                        variants.append((chrom, pos, ref, alt, start_dist, end_dist, info['AO'], info['DP']))
     return variants

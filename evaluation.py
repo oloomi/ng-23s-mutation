@@ -1,10 +1,12 @@
 #!/usr/bin/python3
 
+import sys
+import ast
 import copy
 from vcf_file import *
 
 
-def variant_evaluation():
+def variant_evaluation(gene_loci):
     variant_caller_lst = [("Freebayes", "freebayes")]
     file_path = "./variants/"
     vcf_files_names = [["Bowtie2 best-match", "bowtie-mapping-best-match-sorted"],
@@ -17,7 +19,7 @@ def variant_evaluation():
                        # ["BWA + REMU", "bwa-remu-sorted"]]
     evaluation_results = open("./results/variants-comparison-freebayes.txt", 'w')
 
-    gene_loci = [(1263410, 1266299), (1620898, 1623787), (1724797, 1727686), (1956488, 1959377)]
+    # gene_loci = [(1263410, 1266299), (1620898, 1623787), (1724797, 1727686), (1956488, 1959377)]
     for locus in gene_loci:
         print(locus[1] - locus[0])
 
@@ -38,7 +40,7 @@ def variant_evaluation():
                 print("No variants called in {} !".format(vcf_file))
                 evaluation_results.write("No variants called in {} !\n".format(vcf_file))
                 continue
-            called_variants = [str(v) for v in called_variants]
+            called_variants = ["\t".join([str(e) for e in v]) for v in called_variants]
             print(called_variants)
             evaluation_results.write("{}\n{}\n".format(method_name, "\n".join(called_variants)))
 
@@ -46,6 +48,8 @@ def variant_evaluation():
 
 
 if __name__ == "__main__":
-    variant_evaluation()
+    if len(sys.argv) > 1:
+        variant_evaluation(ast.literal_eval(sys.argv[1]))
+    else:
+        print("Error: list of genes locations not provided!")
 
-#samtools mpileup -r "CP001050.1":1959084-1959084 bowtie-remu-sorted.bam
