@@ -11,7 +11,7 @@ script_path="$( cd "$(dirname "$0")" ; pwd -P )/"
 # grep -E 'NCCP11945' assembly_summary_genbank.txt | cut -f 20
 
 ref_genome="ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/020/105/GCA_000020105.1_ASM2010v1/GCA_000020105.1_ASM2010v1_genomic.fna.gz"
-genes="[(1263410, 1266299), (1620898, 1623787), (1724797, 1727686), (1956488, 1959377)]"
+genes="[(1263410,1266299),(1620898,1623787),(1724797,1727686),(1956488,1959377)]"
 
 # NZ2015-139 AUSMDU00006903 (all 4 mutated)
 mkdir ${dir}lee-C2611T-1
@@ -42,3 +42,8 @@ sh ${script_path}pipeline.sh ${ref_genome} SRR4418256 200 ${genes}
 mkdir ${dir}wind-C2611T-4
 cd ${dir}wind-C2611T-4
 sh ${script_path}pipeline.sh ${ref_genome} SRR4418263 200 ${genes}
+
+# Netherlands-277 SAMN05901176 (no mutation, no exposure)
+mkdir ${dir}wind-C2611T-5
+cd ${dir}wind-C2611T-5
+sh ${script_path}pipeline.sh ${ref_genome} SRR4418278 200 ${genes}
