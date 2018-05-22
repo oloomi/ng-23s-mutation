@@ -16,8 +16,11 @@ get_reads() {
   fastq-dump --outdir $3/reads/fastq --gzip --skip-technical --readids --read-filter pass --dumpbase --split-files --clip $1
   gunzip $3/reads/fastq/$1_pass_1.fastq.gz
   gunzip $3/reads/fastq/$1_pass_2.fastq.gz
-  fastx_trimmer -l $2 -m $2 -Q33 -i $3/reads/fastq/$1_pass_1.fastq -o $3/reads/reads_1.fq
-  fastx_trimmer -l $2 -m $2 -Q33 -i $3/reads/fastq/$1_pass_2.fastq -o $3/reads/reads_2.fq
+  java -jar ~/tools/Trimmomatic-0.38/trimmomatic-0.38.jar PE -phred33 $3/reads/fastq/$1_pass_1.fastq $3/reads/fastq/$1_pass_2.fastq \
+  $3/reads/reads_1.fq $3/reads/output_forward_unpaired.fastq $3/reads/reads_2.fq $3/reads/output_reverse_unpaired.fastq \
+  LEADING:20 TRAILING:20 SLIDINGWINDOW:4:15 MINLEN:100
+#  fastx_trimmer -l $2 -m $2 -Q33 -i $3/reads/fastq/$1_pass_1.fastq -o $3/reads/reads_1.fq
+#  fastx_trimmer -l $2 -m $2 -Q33 -i $3/reads/fastq/$1_pass_2.fastq -o $3/reads/reads_2.fq
 }
 
 
