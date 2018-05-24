@@ -43,7 +43,7 @@ mkdir ${dir}wind-C2611T-4
 cd ${dir}wind-C2611T-4
 sh ${script_path}pipeline.sh ${ref_genome} SRR4418263 200 ${genes}
 
-# Netherlands-277 SAMN05901176 (no mutation, no exposure)
+# Netherlands-52 SAMN05901176 (no mutation, no exposure)
 mkdir ${dir}wind-C2611T-5
 cd ${dir}wind-C2611T-5
 sh ${script_path}pipeline.sh ${ref_genome} SRR4418278 200 ${genes}
