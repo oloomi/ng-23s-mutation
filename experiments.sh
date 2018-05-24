@@ -24,7 +24,7 @@ reads=( "SRR4418280" "SRR4418267" "SRR4418256" "SRR4418263")
 read_len=( 250 250 250 250 )
 
 for ((i=0;i<${#sample[@]};++i)); do
-    run_experiment ${sample[i]} ${reads[i]} ${read_len[i]}
+    run_experiment ${sample[i]} ${reads[i]} ${read_len[i]} &
 done
 
 
