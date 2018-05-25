@@ -19,9 +19,13 @@ run_experiment() {
   sh ${script_path}pipeline.sh ${ref_genome} $2 $3 ${genes}
 }
 
-sample=( "Netherlands-69" "Netherlands-29" "Netherlands-28" "Netherlands-277")
-reads=( "SRR4418280" "SRR4418267" "SRR4418256" "SRR4418263")
-read_len=( 250 250 250 250 )
+sample=( "MIC1-0-GCGS039" "MIC2-2-GCGS228" "MIC2-3-GCGS104" "MIC8-4-GCGS120" "Netherlands-69" "Netherlands-29" "Netherlands-28" "Netherlands-277" )
+reads=( "ERR191768" "ERR222927" "ERR223610" "ERR223626" "SRR4418280" "SRR4418267" "SRR4418256" "SRR4418263" )
+read_len=( 100 100 100 100 250 250 250 250 )
+
+#sample=( "Netherlands-69" "Netherlands-29" "Netherlands-28" "Netherlands-277")
+#reads=( "SRR4418280" "SRR4418267" "SRR4418256" "SRR4418263")
+#read_len=( 250 250 250 250 )
 
 for ((i=0;i<${#sample[@]};++i)); do
     run_experiment ${sample[i]} ${reads[i]} ${read_len[i]} &
