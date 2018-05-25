@@ -13,15 +13,8 @@ def variant_evaluation(gene_loci):
                        ["Bowtie2 report-all", "bowtie-mapping-report-all-sorted"],
                        ["Bowtie2 + MMR", "bowtie-mmr-sorted"],
                        ["Bowtie2 + REMU", "bowtie-remu-sorted"]]
-                       # ["BWA best-match", "bwa-mapping-best-match-sorted"],
-                       # ["BWA report-all", "bwa-mapping-report-all-sorted"],
-                       # ["BWA + MMR", "bwa-mmr-sorted"],
-                       # ["BWA + REMU", "bwa-remu-sorted"]]
-    evaluation_results = open("./results/variants-comparison-freebayes.txt", 'w')
 
-    # gene_loci = [(1263410, 1266299), (1620898, 1623787), (1724797, 1727686), (1956488, 1959377)]
-    for locus in gene_loci:
-        print(locus[1] - locus[0])
+    evaluation_results = open("./results/variants-comparison-freebayes.txt", 'w')
 
     for variant_caller in variant_caller_lst:
         vcf_files = copy.deepcopy(vcf_files_names)
@@ -41,7 +34,6 @@ def variant_evaluation(gene_loci):
                 evaluation_results.write("No variants called in {} !\n".format(vcf_file))
                 continue
             called_variants = ["\t".join([str(e) for e in v]) for v in called_variants]
-            print(called_variants)
             evaluation_results.write("{}\n{}\n".format(method_name, "\n".join(called_variants)))
 
     evaluation_results.close()

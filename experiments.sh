@@ -28,38 +28,14 @@ for ((i=0;i<${#sample[@]};++i)); do
 done
 
 
+# Wind et al. (300bp)
+# Netherlands-69 SAMN05901177 SRR4418280 (1/4 mutated, < 30 days)
+# Netherlands-29 SAMN05901175 SRR4418267 (3/4 mutated, no exposure)
+# Netherlands-28 SAMN05901174 SRR4418256 (3/4 mutated, < 30 days)
+# Netherlands-277 SAMN05901189 SRR4418263 (4/4 mutated, no exposure)
+# Netherlands-52 SAMN05901176 SRR4418278 (no mutation, no exposure)
+# Lee et al. (150bp)
+# NZ2015-139 AUSMDU00006903 SRR5827361 (all 4 mutated)
+# NZ2015-168 AUSMDU00006931 SRR5827099 (all 4 mutated)
 
-## Netherlands-69 SAMN05901177 (1/4 mutated, < 30 days)
-#mkdir ${dir}wind-C2611T-1
-#cd ${dir}wind-C2611T-1
-#sh ${script_path}pipeline.sh ${ref_genome} SRR4418280 200 ${genes}
-#
-## Netherlands-29 SAMN05901175 (3/4 mutated, no exposure)
-#mkdir ${dir}wind-C2611T-2
-#cd ${dir}wind-C2611T-2
-#sh ${script_path}pipeline.sh ${ref_genome} SRR4418267 200 ${genes}
-#
-## Netherlands-28 SAMN05901174 (3/4 mutated, < 30 days)
-#mkdir ${dir}wind-C2611T-3
-#cd ${dir}wind-C2611T-3
-#sh ${script_path}pipeline.sh ${ref_genome} SRR4418256 200 ${genes}
-#
-## Netherlands-277 SAMN05901189 (4/4 mutated, no exposure)
-#mkdir ${dir}wind-C2611T-4
-#cd ${dir}wind-C2611T-4
-#sh ${script_path}pipeline.sh ${ref_genome} SRR4418263 200 ${genes}
-#
-## Netherlands-52 SAMN05901176 (no mutation, no exposure)
-#mkdir ${dir}wind-C2611T-5
-#cd ${dir}wind-C2611T-5
-#sh ${script_path}pipeline.sh ${ref_genome} SRR4418278 200 ${genes}
-#
-## NZ2015-139 AUSMDU00006903 (all 4 mutated)
-#mkdir ${dir}lee-C2611T-1
-#cd ${dir}lee-C2611T-1
-#sh ${script_path}pipeline.sh ${ref_genome} SRR5827361 130 ${genes}
-#
-## NZ2015-168 AUSMDU00006931 (all 4 mutated)
-#mkdir ${dir}lee-C2611T-2
-#cd ${dir}lee-C2611T-2
-#sh ${script_path}pipeline.sh ${ref_genome} SRR5827099 130 ${genes}
+# samtools mpileup -A --ff UNMAP -d 8000 -r CP001050.1:1263703-1263703 ./mappings/bowtie/bowtie-remu-sorted.bam
