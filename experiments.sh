@@ -31,6 +31,7 @@ for ((i=0;i<${#sample[@]};++i)); do
     run_experiment ${sample[i]} ${reads[i]} ${read_len[i]} &
 done
 
+python3 ${script_path}mutation_counts.py "${sample[@]}"
 
 # Wind et al. (300bp)
 # Netherlands-69 SAMN05901177 SRR4418280 (1/4 mutated, < 30 days)
