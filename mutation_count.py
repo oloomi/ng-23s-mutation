@@ -23,8 +23,10 @@ def bases_at_pos(file_name, chromosome, pos):
                 # print("Base {} with mapping quality score {}".format(base, base_qual))
     return total_count, base_counts
 
+
 def nearest_quarter(x):
-    return round(x * 4) / 4
+    return int((round(x * 4) / 4) / 0.25)
+
 
 def find_mutation_counts(samples):
     results = open("all-samples-23S-count.txt", 'w')
