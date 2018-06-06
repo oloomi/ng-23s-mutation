@@ -47,7 +47,8 @@ def find_mutation_counts(samples):
 
         # The results for masking three copies of 23S gene
         results.write("Bowtie-masked\n")
-        total_count, base_counts = bases_at_pos(file_path + our_method, ref_seq, positions[3][0])
+        other_method = "bowtie-mapping-best-match-masked-sorted.bam"
+        total_count, base_counts = bases_at_pos(file_path + other_method, ref_seq, positions[3][0])
         allele_count = base_counts['T']
         ref_count = base_counts['C']
         ratio = allele_count / ref_count
