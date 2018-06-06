@@ -17,33 +17,23 @@ genes="[(1263410,1266299),(1620898,1623787),(1724797,1727686),(1956488,1959377)]
 #genes="[(1116249,1119158),(1258352,1261255),(1649928,1652830),(1873080,1875982)]"
 
 run_experiment() {
+  echo "Running experiments for sample {$1} ..."
   mkdir ${dir}$1
   cd ${dir}$1
   sh ${script_path}pipeline.sh ${ref_genome} $2 $3 ${genes}
+  echo "Experiments for sample {$1} completed!"
 }
 
-sample=( "MIC1-0-GCGS039" "MIC2-2-GCGS228" "MIC2-3-GCGS104" "MIC8-4-GCGS120" "Netherlands-69" "Netherlands-29" "Netherlands-28" "Netherlands-277" )
-reads=( "ERR191768" "ERR222927" "ERR223610" "ERR223626" "SRR4418280" "SRR4418267" "SRR4418256" "SRR4418263" )
-read_len=( 100 100 100 100 250 250 250 250 )
+sample=( "MIC1-0-GCGS039" "MIC2-2-GCGS228" "MIC2-3-GCGS104" "MIC8-4-GCGS120" )
+reads=( "ERR191768" "ERR222927" "ERR223610" "ERR223626" )
+read_len=( 100 100 100 100 )
 
-#sample=( "Netherlands-69" "Netherlands-29" "Netherlands-28" "Netherlands-277")
-#reads=( "SRR4418280" "SRR4418267" "SRR4418256" "SRR4418263")
-#read_len=( 250 250 250 250 )
+#sample=( "MIC1-0-GCGS039" "MIC2-2-GCGS228" "MIC2-3-GCGS104" "MIC8-4-GCGS120" "Netherlands-69" "Netherlands-29" "Netherlands-28" "Netherlands-277" )
+#reads=( "ERR191768" "ERR222927" "ERR223610" "ERR223626" "SRR4418280" "SRR4418267" "SRR4418256" "SRR4418263" )
+#read_len=( 100 100 100 100 250 250 250 250 )
 
 for ((i=0;i<${#sample[@]};++i)); do
     run_experiment ${sample[i]} ${reads[i]} ${read_len[i]} &
 done
 
 python3 ${script_path}mutation_count.py "${sample[@]}"
-
-# Wind et al. (300bp)
-# Netherlands-69 SAMN05901177 SRR4418280 (1/4 mutated, < 30 days)
-# Netherlands-29 SAMN05901175 SRR4418267 (3/4 mutated, no exposure)
-# Netherlands-28 SAMN05901174 SRR4418256 (3/4 mutated, < 30 days)
-# Netherlands-277 SAMN05901189 SRR4418263 (4/4 mutated, no exposure)
-# Netherlands-52 SAMN05901176 SRR4418278 (no mutation, no exposure)
-# Lee et al. (150bp)
-# NZ2015-139 AUSMDU00006903 SRR5827361 (all 4 mutated)
-# NZ2015-168 AUSMDU00006931 SRR5827099 (all 4 mutated)
-
-# samtools mpileup -A --ff UNMAP -d 8000 -r CP001050.1:1263703-1263703 ./mappings/bowtie/bowtie-remu-sorted.bam
