@@ -27,7 +27,7 @@ def write_genome(genome_seq, output_file):
             # Sequence name
             genome_file.write('>' + chrom_name + '\n')
             # Writing sequence to file, 70 characters per line
-            line_width = 60
+            line_width = 70
             length = len(chrom_seq)
             for i in range(length // line_width):
                 genome_file.write(''.join(chrom_seq[i * line_width: (i + 1) * line_width]))
