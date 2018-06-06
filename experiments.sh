@@ -21,7 +21,6 @@ run_experiment() {
   mkdir ${dir}$1
   cd ${dir}$1
   sh ${script_path}pipeline.sh ${ref_genome} $2 $3 ${genes}
-  sync
   echo "Experiments for sample {$1} completed!"
 }
 
