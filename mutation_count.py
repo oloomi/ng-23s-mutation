@@ -36,6 +36,7 @@ def find_mutation_counts(samples):
     for sample in samples:
         results.write("{}\n".format(sample))
         file_path = "./{}/mappings/bowtie/".format(sample)
+        # The results from multi-mapping resolution
         results.write("Bowtie+REMU\n")
         for pos in positions:
             all_total_count, all_base_counts = bases_at_pos(file_path + report_all_mapping, ref_seq, pos[0])
@@ -43,6 +44,15 @@ def find_mutation_counts(samples):
             allele_count = base_counts[pos[1]]
             ratio = allele_count / all_total_count
             results.write("{}\t{}\t{}\t{}\t{}\n".format(pos[0], allele_count, all_total_count, round(ratio, 2), nearest_quarter(ratio)))
+
+        # The results for masking three copies of 23S gene
+        results.write("Bowtie-masked\n")
+        total_count, base_counts = bases_at_pos(file_path + our_method, ref_seq, positions[3][0])
+        allele_count = base_counts['T']
+        ref_count = base_counts['C']
+        ratio = allele_count / ref_count
+        results.write("{}\t{}\t{}\t{}\t{}\n".format(positions[3][0], allele_count, ref_count, round(ratio, 2),
+                                                    nearest_quarter(ratio)))
     results.close()
     return True
 

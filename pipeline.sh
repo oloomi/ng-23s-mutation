@@ -30,6 +30,7 @@ get_reads() {
 
 make_exp_dir .
 get_genome $1
+python3 ${script_path}mask_genome.py ./genome/reference-genome.fna $4
 get_reads $2 $3 .
 
 sh ${script_path}read-mapping.sh
