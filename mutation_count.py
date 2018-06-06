@@ -51,7 +51,7 @@ def find_mutation_counts(samples):
         total_count, base_counts = bases_at_pos(file_path + other_method, ref_seq, positions[3][0])
         allele_count = base_counts['T']
         ref_count = base_counts['C']
-        ratio = allele_count / ref_count
+        ratio = allele_count / (allele_count + ref_count)
         results.write("{}\t{}\t{}\t{}\t{}\n".format(positions[3][0], allele_count, ref_count, round(ratio, 2),
                                                     nearest_quarter(ratio)))
     results.close()
