@@ -28,7 +28,7 @@ def nearest_quarter(x):
 
 def find_mutation_counts(samples):
     results = open("all-samples-23S-count.txt", 'w')
-    positions = [(1263703, 'A'), (1621191, 'A'), (1725090, 'A'), (1959084, 'C')]
+    positions = [(1263703, 'A'), (1621191, 'A'), (1725090, 'A'), (1959084, 'T')]
     ref_seq = "CP001050.1"
     report_all_mapping = "bowtie-mapping-report-all-sorted.bam"
     our_method = "bowtie-remu-sorted.bam"
