@@ -43,7 +43,7 @@ def write_genome(genome_seq, output_file):
 
 def mask_genome(genome_file, locations):
     genome_seq = read_genome(genome_file)
-    chrom_name = list(genome_seq.keys())[0]
+    chrom_name = sorted(list(genome_seq.keys())[0])
     for loc in locations[:3]:
         for pos in range(loc[0]-1, loc[1]):
             genome_seq[chrom_name][pos] = 'N'
