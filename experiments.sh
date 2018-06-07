@@ -18,7 +18,7 @@ genes="[(1263410,1266299),(1620898,1623787),(1724797,1727686),(1956488,1959377)]
 
 run_experiment() {
   echo "Running experiments for sample {$1} ..."
-  mkdir ${dir}$1
+  mkdir -p ${dir}$1
   cd ${dir}$1
   sh ${script_path}pipeline.sh ${ref_genome} $2 $3 ${genes}
   echo "Experiments for sample {$1} completed!"
