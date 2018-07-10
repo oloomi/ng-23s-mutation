@@ -10,7 +10,7 @@ file_path="./mappings/bowtie/"
 alignment_files="bowtie-mapping-best-match-sorted
 bowtie-mapping-report-all-sorted
 bowtie-mmr-sorted
-bowtie-remu-sorted"
+bowtie-prom-sorted"
 
 
 for file in ${alignment_files}

@@ -33,13 +33,13 @@ def find_mutation_counts(samples):
     positions = [(1263703, 'A'), (1621191, 'A'), (1725090, 'A'), (1959084, 'T')]
     ref_seq = "CP001050.1"
     report_all_mapping = "bowtie-mapping-report-all-sorted.bam"
-    our_method = "bowtie-remu-sorted.bam"
+    our_method = "bowtie-prom-sorted.bam"
     other_method = ""
     for sample in samples:
         results.write("{}\n".format(sample))
         file_path = "./{}/mappings/bowtie/".format(sample)
         # The results from multi-mapping resolution
-        results.write("Bowtie+REMU\n")
+        results.write("Bowtie+PROM\n")
         for pos in positions:
             all_total_count, all_base_counts = bases_at_pos(file_path + report_all_mapping, ref_seq, pos[0])
             total_count, base_counts = bases_at_pos(file_path + our_method, ref_seq, pos[0])
@@ -65,4 +65,4 @@ if __name__ == "__main__":
     else:
         print("Error: list of sample names/folders not provided!")
 
-# bases_at_pos("bowtie-remu-sorted.bam", "CP001050.1", 1959084)
+# bases_at_pos("bowtie-prom-sorted.bam", "CP001050.1", 1959084)

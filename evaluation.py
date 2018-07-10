@@ -12,7 +12,7 @@ def variant_evaluation(gene_loci):
     vcf_files_names = [["Bowtie2 best-match", "bowtie-mapping-best-match-sorted"],
                        ["Bowtie2 report-all", "bowtie-mapping-report-all-sorted"],
                        ["Bowtie2 + MMR", "bowtie-mmr-sorted"],
-                       ["Bowtie2 + REMU", "bowtie-remu-sorted"]]
+                       ["Bowtie2 + PROM", "bowtie-prom-sorted"]]
 
     evaluation_results = open("./results/variants-comparison-freebayes.txt", 'w')
 
